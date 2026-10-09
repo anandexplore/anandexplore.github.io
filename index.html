@@ -133,6 +133,27 @@ footer{padding:2.5rem 0 3rem;color:var(--muted);font-size:.92rem;text-align:cent
   .hero{padding-top:2.5rem}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.portrait{position:relative;overflow:hidden}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.now{display:grid;grid-template-columns:minmax(0,1fr);background:linear-gradient(120deg,var(--amber-soft),var(--surface));border:1px solid var(--rule);border-left:8px solid var(--amber);border-radius:14px;padding:1.6rem 1.7rem}
+.now .area{font-family:var(--display);font-size:.85rem;font-weight:700;color:#8A5A00}
+:root[data-theme="dark"] .now .area{color:#FFD27A}
+.now h3{font-family:var(--display);font-size:1.3rem;margin:.4rem 0 .6rem}
+.now p{margin:0 0 .8rem;max-width:75ch}
+.now .result{justify-self:start}
+.now ul{margin:0 0 1rem;padding-left:1.2rem;max-width:75ch}
+.now li{margin-bottom:.4rem}
+.exp{display:grid;gap:1rem}
+.job{display:grid;grid-template-columns:9.5rem minmax(0,1fr);gap:1.25rem;background:var(--surface);border:1px solid var(--rule);border-left:6px solid var(--c);border-radius:14px;padding:1.2rem 1.4rem}
+.job .when{font-family:var(--display);font-weight:700;font-size:.9rem;color:var(--c);line-height:1.35}
+:root[data-theme="dark"] .job .when{filter:brightness(1.5)}
+.job h3{font-family:var(--display);font-size:1.08rem;margin:0}
+.job .org{color:var(--muted);font-size:.95rem;margin:.1rem 0 .5rem}
+.job p{margin:0}
+.tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1rem}
+.tags span{font-family:var(--display);font-size:.82rem;font-weight:500;background:var(--blue-soft);border-radius:999px;padding:.25rem .75rem}
+@media (max-width:640px){.job{grid-template-columns:1fr;gap:.4rem}}
 </style>
 </head>
 <body>
@@ -141,11 +162,12 @@ footer{padding:2.5rem 0 3rem;color:var(--muted);font-size:.92rem;text-align:cent
   <div class="wrap bar">
     <a class="brand" href="#top"><span class="badge">AC</span>Anand Chinnakannan</a>
     <nav class="main" aria-label="Sections">
+      <a href="#now">Now</a>
       <a href="#work">Work</a>
-      <a href="#path">Career path</a>
-      <a href="#patent">Patent and papers</a>
+      <a href="#experience">Experience</a>
+      <a href="#patent">Patent</a>
       <a href="#talks">Talks</a>
-      <a href="#judging">Judging</a>
+      <a href="#recognition">Recognition</a>
       <a href="#contact">Contact</a>
     </nav>
     <button class="toggle" id="theme" type="button" aria-label="Switch between light and dark theme">Theme</button>
@@ -157,29 +179,45 @@ footer{padding:2.5rem 0 3rem;color:var(--muted);font-size:.92rem;text-align:cent
     <div class="wrap">
       <div class="hero-grid">
         <div>
-          <span class="kicker">Retail supply chain AI at Walmart scale</span>
+          <span class="kicker">Tech Lead and Staff Machine Learning Engineer at Walmart</span>
           <h1>Machine learning that keeps retail supply chains moving.</h1>
-          <p class="lead">I'm Anand Chinnakannan. For ten years I have built data platforms, forecasting models, optimization and conversational AI for Walmart and Sam's Club, so planners can see what is coming and decide what to move and when.</p>
+          <p class="lead">I'm Anand Chinnakannan. For nearly two decades I have built data platforms, forecasting models, optimization and generative AI for Walmart and Sam's Club, so planners and teams can see what is coming and decide what to do next.</p>
           <div class="btns">
             <a class="btn primary" href="#work">See the work</a>
             <a class="btn ghost" href="https://www.linkedin.com/in/anand-chinnakannan-datascienceai/" rel="noopener">LinkedIn</a>
           </div>
         </div>
-        <div class="portrait" role="img" aria-label="Monogram AC"><div>AC<small>Walmart Global Tech</small></div></div>
+        <div class="portrait"><div>AC<small>Walmart</small></div><img src="profile.jpg" alt="Portrait of Anand Chinnakannan" onerror="this.remove()"></div>
       </div>
 
       <div class="stats">
-        <div class="tile t1"><b>10+</b><span>years in retail data and machine learning</span></div>
+        <div class="tile t1"><b>18+</b><span>years in software, data and machine learning</span></div>
         <div class="tile t2"><b>1</b><span>granted US patent as co-inventor</span></div>
-        <div class="tile t3"><b>$5M+</b><span>reported savings from Sam's Club supply chain work</span></div>
-        <div class="tile t4"><b>4</b><span>invited talks, lectures and forums in 2025 to 2026</span></div>
+        <div class="tile t3"><b>$3M</b><span>Google Cloud savings from cost-monitoring work</span></div>
+        <div class="tile t4"><b>5</b><span>invited talks, lectures and forums in 2025 to 2026</span></div>
       </div>
     </div>
   </div>
 
   <div class="wrap">
+    <section id="now">
+      <h2>Current project</h2>
+      <p class="sub">What I'm building at the moment.</p>
+      <article class="now">
+        <span class="area">June 2025 to present · People Analytics · Walmart</span>
+        <h3>Generative AI for enterprise support and supplier marketing</h3>
+        <p>I lead a team applying generative AI to internal support and supplier-facing work.</p>
+        <ul>
+          <li>An automated ticket classifier inside ServiceNow that uses a debater-and-judge approach with GPT models to understand what each ticket needs and route it correctly.</li>
+          <li>An XGBoost classifier that works alongside the language models, reaching an F1-score of 0.91 and precision of 0.93 on labeled ticket data, inside a hybrid pipeline that also uses rule-based checks.</li>
+          <li>Supplier process automation that drafts ads and documents for supplier marketing, tuned to enterprise standards and compliance rules.</li>
+        </ul>
+        <span class="result" style="--soft:var(--amber-soft)">F1 0.91 · precision 0.93 on labeled tickets</span>
+      </article>
+    </section>
+
     <section id="work">
-      <h2>Selected work</h2>
+      <h2>Selected work at Sam's Club and Walmart</h2>
       <p class="sub">Each project starts with the problem, then what I built and the result I can point to.</p>
       <div class="grid2">
         <article class="card c-blue">
@@ -190,45 +228,73 @@ footer{padding:2.5rem 0 3rem;color:var(--muted);font-size:.92rem;text-align:cent
         </article>
         <article class="card c-violet">
           <span class="area">Conversational AI · Operations</span>
-          <h3>Ask your supply chain a question</h3>
-          <p>Dialogue systems that let operators ask about forecasts, KPIs and exceptions in plain language and get answers in real time.</p>
-          <span class="result">Real-time answers for operators</span>
+          <h3>The SPOT chatbot</h3>
+          <p>Built the retrieval-augmented (RAG) model behind the SPOT chatbot for import distribution center questions, and helped fine-tune its language model with a similarity-matrix approach, so operators can ask about forecasts and exceptions in plain language.</p>
+          <span class="result">Plain-language answers for operators</span>
         </article>
         <article class="card c-teal">
           <span class="area">Optimization · Forecasting · Logistics</span>
-          <h3>Import, direct-ship and out-pallet optimization</h3>
-          <p>Container and cubic-meter forecasting with adaptive time-series models. AI-assisted routing and scheduling for direct vendor shipping. Pallet-mix and load optimization that lowered outbound transportation cost.</p>
-          <span class="result">Lower outbound transportation cost</span>
+          <h3>Forecasting and optimization across the network</h3>
+          <p>Import distribution center outbound forecasting at 97% accuracy using Prophet, and a direct-to-vendor shipment forecast at 90% using a Prophet and XGBoost ensemble. A clustering model on trailer dwell time cut carrier delay costs by 40%, and a full-pallet optimization analysis cut operational costs by 30%.</p>
+          <span class="result">97% accuracy · 40% lower delay cost · 30% lower pallet cost</span>
         </article>
         <article class="card c-coral">
           <span class="area">Cloud · Data engineering · Walmart</span>
           <h3>A leaner data platform</h3>
-          <p>Re-architected the Sales Order Line module, which processes petabytes of data, cutting its Google Cloud cost by 50%. Cost-monitoring dashboards and a storage move to AWS saved about $3 million and $1 million.</p>
+          <p>Re-architected the Sales Order Line module, which processes petabytes of data, cutting its Google Cloud cost by 50%. Led the cloud team in building BigQuery cost dashboards that helped save about $3 million.</p>
           <span class="result">50% lower GCP cost on one module</span>
         </article>
       </div>
-      <div class="also"><b>Also built:</b> segment and Customer Lifetime Value models for time-sensitive and budget-sensitive busy families, and an Associate Customer 360 platform for the United States that was later extended globally.</div>
+      <div class="also"><b>Also built:</b> customer lifetime value and revenue models that predict behavior over 30 days, 60 days and 3 years, MLOps pipelines with a data quality framework for trailer forecasting, and an assortment optimization tool that automated 90% of a data pipeline and cut a five-day workshop process to one day.</div>
     </section>
 
-    <section id="path">
-      <h2>Career path</h2>
-      <p class="sub">From customer data, to the platforms underneath it, to forecasting and AI that help people decide.</p>
-      <div class="path">
-        <div class="step" style="--c:var(--teal)">
-          <span class="yrs">2016 to 2018</span>
-          <h3>Customer and data platforms</h3>
-          <p>Assortment optimization team at Walmart. Built a data-as-a-service layer on Hadoop, scaled clustering and XGBoost on Spark, and set up governance and PII protection.</p>
-        </div>
-        <div class="step" style="--c:var(--violet)">
-          <span class="yrs">2020 to 2022</span>
-          <h3>Customer analytics and cloud</h3>
-          <p>Senior data scientist at Walmart. Built customer models, redesigned a petabyte-scale module, and led cloud cost work.</p>
-        </div>
-        <div class="step" style="--c:var(--blue)">
-          <span class="yrs">2022 to now</span>
-          <h3>Supply chain machine learning</h3>
-          <p>Sam's Club and Walmart Global Tech. Forecasting, optimization and conversational AI for import and distribution planning.</p>
-        </div>
+    <section id="experience">
+      <h2>Experience</h2>
+      <p class="sub">From banking systems and retail catalogs to supply chain machine learning and generative AI.</p>
+      <div class="exp">
+        <article class="job" style="--c:#B27700">
+          <div class="when">Jun 2025<br>to present</div>
+          <div><h3>Tech Lead and Staff Machine Learning Engineer</h3><div class="org">Walmart · People Analytics · Bentonville, Arkansas</div>
+          <p>Leads generative AI work on ticket classification in ServiceNow and supplier marketing automation.</p></div>
+        </article>
+        <article class="job" style="--c:var(--blue)">
+          <div class="when">Mar 2022<br>to Apr 2025</div>
+          <div><h3>Tech Lead and Senior Machine Learning Engineer</h3><div class="org">Sam's Club · Supply Chain Analytics · Bentonville, Arkansas</div>
+          <p>Built forecasting and MLOps pipelines for import and direct-ship planning, the SPOT chatbot, and led the team through a Databricks and Spark migration.</p></div>
+        </article>
+        <article class="job" style="--c:var(--violet)">
+          <div class="when">Sep 2019<br>to Feb 2022</div>
+          <div><h3>Senior Data Scientist</h3><div class="org">Walmart · Customer Insights and Research · Bentonville, Arkansas</div>
+          <p>Scaled customer lifetime value models, built RFM scoring pipelines, re-architected a petabyte-scale module, and led cloud cost work.</p></div>
+        </article>
+        <article class="job" style="--c:var(--teal)">
+          <div class="when">Jul 2016<br>to Aug 2019</div>
+          <div><h3>Senior Software Engineer</h3><div class="org">Walmart · Assortment and Modular Analytics · Bentonville, Arkansas</div>
+          <p>Ran machine learning for assortment analytics on Spark and Hadoop at petabyte scale, including an XGBoost pipeline covering 3 million items.</p></div>
+        </article>
+        <article class="job" style="--c:var(--coral)">
+          <div class="when">Nov 2015<br>to Jun 2016</div>
+          <div><h3>Big Data Lead</h3><div class="org">Tata Consultancy Services · Customer Knowledge Platform for Walmart</div>
+          <p>Designed the architecture to store customer analytics records, ingested about 12 petabytes, and built MapReduce jobs using the Haversine formula for customer location.</p></div>
+        </article>
+        <article class="job" style="--c:var(--blue)">
+          <div class="when">Nov 2013<br>to Oct 2015</div>
+          <div><h3>Web Developer Data Lead</h3><div class="org">Tata Consultancy Services · Item Data Management for Home Depot</div>
+          <p>Built item catalog applications and data cleansing services for millions of items.</p></div>
+        </article>
+        <article class="job" style="--c:var(--violet)">
+          <div class="when">Dec 2011<br>to Nov 2013</div>
+          <div><h3>Web Developer Data Lead</h3><div class="org">Tata Consultancy Services · Catalog Data Service for Target</div>
+          <p>Developed the data service layer for catalog applications.</p></div>
+        </article>
+        <article class="job" style="--c:var(--teal)">
+          <div class="when">Dec 2006<br>to Oct 2009</div>
+          <div><h3>Data Engineer</h3><div class="org">Sella Synergy and Gruppo Banca Sella · Internal Rating System</div>
+          <p>Built an internal credit rating system as a web application, with its data models and database design.</p></div>
+        </article>
+      </div>
+      <div class="tags" aria-label="Tools">
+        <span>Python</span><span>Spark</span><span>XGBoost</span><span>Prophet</span><span>LLMs and RAG</span><span>LangChain</span><span>GPT</span><span>Databricks</span><span>Airflow</span><span>Google Cloud</span><span>AWS</span><span>Azure</span><span>Snowflake</span><span>Docker</span><span>CI/CD</span>
       </div>
     </section>
 
@@ -259,6 +325,10 @@ footer{padding:2.5rem 0 3rem;color:var(--muted);font-size:.92rem;text-align:cent
       <h2>Talks and lectures</h2>
       <p class="sub">Invitations to share production AI experience with students, researchers and logistics leaders.</p>
       <div class="talks">
+        <article class="talk" style="--c:#B27700">
+          <div class="date">Sep 24<small>2026</small></div>
+          <div><h3>STARWEST 2026, Anaheim: Building Ethical AI Literacy in Next-Generation Test Automation Leaders</h3><p>Concurrent session in the Ethical AI track, 1:30 to 2:30 pm. It follows the software delivery lifecycle (test planning, design, execution, pipelines and release decisions) to show where AI-powered testing creates new risks and responsibilities for quality leaders, and gives teams a practical way to build ethical AI literacy. <a href="https://starwest.techwell.com/program/concurrent-sessions/building-ethical-ai-literacy-next-generation-test-automation-leaders-starwest-2026" rel="noopener">Session page</a></p></div>
+        </article>
         <article class="talk" style="--c:var(--coral)">
           <div class="date">May 20<small>2026</small></div>
           <div><h3>Home Delivery World 2026, Nashville</h3><p>Invited panelist on "Minimizing Disruptions Through Automated Exception Handling and Notifications," at the Music City Center. Invitation from the organizer, Terrapinn.</p></div>
@@ -292,6 +362,25 @@ footer{padding:2.5rem 0 3rem;color:var(--muted);font-size:.92rem;text-align:cent
           <h3>Judge, Ohio STEP</h3>
           <p>Took part in the 2025 judging orientation and scored STEM business and commercialization plans.</p>
         </article>
+      </div>
+    </section>
+
+    <section id="recognition">
+      <h2>Education and recognition</h2>
+      <p class="sub">Degrees, certificates and awards from my employers.</p>
+      <div class="grid2">
+        <article class="card c-blue"><span class="area">Education</span>
+          <h3>MBA, Quantic School of Business and Technology</h3>
+          <p>2026. Also an MS in Software Systems from BITS Pilani (2011) and a BE in Computer Science and Engineering from Anna University (2006).</p></article>
+        <article class="card c-violet"><span class="area">Certificates</span>
+          <h3>Leading Teams, University of Michigan</h3>
+          <p>Also eCornell Machine Learning Foundations (2021), plus Java (SCJP) and big data certifications.</p></article>
+        <article class="card c-teal"><span class="area">Sam's Club</span>
+          <h3>MAD award</h3>
+          <p>Recognized for outstanding contribution in technology.</p></article>
+        <article class="card c-coral"><span class="area">Walmart</span>
+          <h3>Star Awards</h3>
+          <p>Earned for work in the Merchandising area, and separately for an Item Catalog project deliverable.</p></article>
       </div>
     </section>
 
