@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anand Chinnakannan | Machine learning for retail supply chains</title>
+<meta name="description" content="Machine learning engineer building forecasting, optimization and AI systems for retail supply chains at Walmart scale. Patent co-inventor, invited speaker and judge.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF1F4; --surface:#F8FAFB; --ink:#13212B; --muted:#4A5B68; --rule:#C9D3DA;
+  --accent:#2447C4; --accent-soft:#DCE4FA;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1822; --surface:#152230; --ink:#E6EDF3; --muted:#98A9B7; --rule:#263748;
+    --accent:#8CB4FF; --accent-soft:#1C2E4A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1822; --surface:#152230; --ink:#E6EDF3; --muted:#98A9B7; --rule:#263748;
+  --accent:#8CB4FF; --accent-soft:#1C2E4A;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 1.5rem)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.65}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+.shell{max-width:1120px;margin:0 auto;padding:2rem 1.5rem 4rem;display:grid;grid-template-columns:260px minmax(0,1fr);gap:4rem}
+
+/* Rail */
+.rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 2rem);align-self:start}
+.mark{font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1.15;margin:0}
+.role{color:var(--muted);margin:.5rem 0 1.5rem;font-size:.98rem}
+.rail nav{display:flex;flex-direction:column;gap:.15rem;border-left:2px solid var(--rule)}
+.rail nav a{font-family:var(--display);font-weight:500;text-decoration:none;color:var(--muted);padding:.35rem 0 .35rem 1rem;margin-left:-2px;border-left:2px solid transparent}
+.rail nav a:hover{color:var(--ink)}
+.rail nav a[aria-current="true"]{color:var(--accent);border-left-color:var(--accent)}
+.rail .links{margin-top:1.5rem;display:flex;flex-direction:column;gap:.4rem;font-size:.95rem}
+.toggle{margin-top:1.5rem;font:inherit;font-family:var(--display);font-size:.85rem;background:transparent;color:var(--muted);border:1px solid var(--rule);border-radius:999px;padding:.35rem .9rem;cursor:pointer}
+.toggle:hover{color:var(--ink);border-color:var(--muted)}
+
+/* Hero */
+.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(2rem,5.2vw,3.35rem);line-height:1.08;letter-spacing:-.02em;margin:0 0 1.25rem;max-width:18ch}
+.hero p.lead{font-size:1.2rem;max-width:56ch;margin:0 0 2rem}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin:0;border-top:1px solid var(--rule)}
+.facts div{padding:.85rem 1rem .85rem 0;border-bottom:1px solid var(--rule)}
+.facts dt{font-family:var(--display);font-size:.88rem;color:var(--muted);margin:0}
+.facts dd{margin:.1rem 0 0;font-weight:600}
+
+/* Sections and ledger entries */
+section{padding-top:3.5rem}
+h2{font-family:var(--display);font-weight:700;font-size:1.75rem;letter-spacing:-.01em;margin:0 0 .4rem}
+.intro{color:var(--muted);max-width:60ch;margin:0 0 1.5rem}
+.entry{display:grid;grid-template-columns:9rem minmax(0,1fr);gap:1.5rem;padding:1.4rem 0;border-top:1px solid var(--rule)}
+.entry:last-child{border-bottom:1px solid var(--rule)}
+.when{font-family:var(--display);font-weight:500;font-size:.92rem;color:var(--muted)}
+.entry h3{font-family:var(--display);font-weight:700;font-size:1.18rem;line-height:1.3;margin:0 0 .35rem}
+.entry p{margin:0 0 .6rem;max-width:62ch}
+.entry p:last-child{margin-bottom:0}
+.tag{display:inline-block;font-family:var(--display);font-size:.82rem;background:var(--accent-soft);color:var(--accent);padding:.12rem .6rem;border-radius:999px;margin:.15rem .3rem .15rem 0}
+.panel{background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:1.4rem 1.5rem}
+.panel h3{font-family:var(--display);margin:0 0 .4rem;font-size:1.18rem}
+.panel p{margin:0 0 .6rem;max-width:62ch}
+.panel p:last-child{margin:0}
+.meta{color:var(--muted);font-size:.95rem}
+footer{margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.92rem}
+
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr;gap:1.5rem;padding-top:1.25rem}
+  .rail{position:static}
+  .rail nav{flex-direction:row;flex-wrap:wrap;gap:.25rem 1rem;border-left:0}
+  .rail nav a{border-left:0;padding:.2rem 0;margin:0;border-bottom:2px solid transparent}
+  .rail nav a[aria-current="true"]{border-bottom-color:var(--accent)}
+  .rail .links{flex-direction:row;flex-wrap:wrap;gap:.4rem 1.2rem}
+  .entry{grid-template-columns:1fr;gap:.35rem}
+}
+@media (max-width:520px){.facts{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<aside class="rail">
+  <p class="mark">Anand Chinnakannan</p>
+  <p class="role">Machine learning engineer, retail supply chain, Walmart Global Tech</p>
+  <nav aria-label="Sections">
+    <a href="#top" aria-current="true">Overview</a>
+    <a href="#work">Work</a>
+    <a href="#patent">Patent and papers</a>
+    <a href="#talks">Talks and lectures</a>
+    <a href="#judging">Judging</a>
+    <a href="#background">Background</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="links">
+    <a href="https://www.linkedin.com/in/anand-chinnakannan-datascienceai/" rel="noopener">LinkedIn</a>
+  </div>
+  <button class="toggle" id="theme" type="button" aria-label="Switch between light and dark theme">Switch theme</button>
+</aside>
+
+<main id="top">
+  <div class="hero">
+    <h1>I build the forecasting and planning systems that keep retail shelves stocked.</h1>
+    <p class="lead">For ten years I have worked on data, machine learning and AI for Walmart and Sam's Club supply chains, from the first customer data platforms to forecasting, optimization and conversational tools that planners use every day.</p>
+    <dl class="facts">
+      <div><dt>In the field</dt><dd>10+ years in retail data and ML</dd></div>
+      <div><dt>Patent</dt><dd>1 granted US patent as co-inventor</dd></div>
+      <div><dt>Reported savings</dt><dd>$5M+ from Sam's Club supply chain work</dd></div>
+      <div><dt>Invited events</dt><dd>4 talks, lectures and forums, 2025 to 2026</dd></div>
+    </dl>
+  </div>
+
+  <section id="work">
+    <h2>Work</h2>
+    <p class="intro">Each entry names the problem, what I built, and the result I can point to.</p>
+
+    <article class="entry">
+      <div class="when">2022 to 2025<br>Sam's Club</div>
+      <div>
+        <h3>SPOT: planning visibility for the import network</h3>
+        <p>A platform that gives planners one place to see inbound and outbound forecasts and how volume shifts upstream. In March 2024, Integrated Planning leaders, including a Senior Director, credited it with reducing manual forecasting work and said it now drives their Imports operations calls.</p>
+        <span class="tag">Platform</span><span class="tag">Forecasting</span><span class="tag">Imports</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="when">2022 to 2025<br>Sam's Club</div>
+      <div>
+        <h3>Conversational AI for supply chain operators</h3>
+        <p>Dialogue systems that let operators ask about forecasts, KPIs and exceptions in plain language and get answers in real time.</p>
+        <span class="tag">Conversational AI</span><span class="tag">Operations</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="when">2022 to 2025<br>Sam's Club</div>
+      <div>
+        <h3>Import, direct-ship and out-pallet optimization</h3>
+        <p>Container and cubic-meter forecasting with adaptive time-series models for import distribution centers. AI-assisted routing and scheduling for direct vendor shipping. Pallet-mix and load optimization that lowered outbound transportation cost.</p>
+        <span class="tag">Optimization</span><span class="tag">Time series</span><span class="tag">Logistics</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="when">2020 to 2022<br>Walmart</div>
+      <div>
+        <h3>Customer models and a leaner data platform</h3>
+        <p>Built segment and Customer Lifetime Value models for time-sensitive and budget-sensitive busy families. Re-architected the Sales Order Line module, which processes petabytes of data, and cut its Google Cloud cost by 50%. Cost-monitoring dashboards and a move of storage to AWS saved about $3 million and $1 million respectively.</p>
+        <span class="tag">Customer analytics</span><span class="tag">Cloud cost</span><span class="tag">Data engineering</span>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="when">2016 to 2018<br>Walmart</div>
+      <div>
+        <h3>Customer 360 and data-as-a-service on Hadoop</h3>
+        <p>Designed an Associate Customer 360 platform for the United States and later extended it globally. Built a data-as-a-service layer on on-premise Hadoop, scaled clustering and XGBoost on Spark, and put governance and PII protection around the data.</p>
+        <span class="tag">Hadoop</span><span class="tag">Spark</span><span class="tag">Governance</span>
+      </div>
+    </article>
+  </section>
+
+  <section id="patent">
+    <h2>Patent and papers</h2>
+    <p class="intro">Original technical work, with its status stated plainly.</p>
+
+    <div class="panel">
+      <h3>US Patent 10,235,687 B1: Shortest Distance to Store</h3>
+      <p>Co-inventor. A method that builds attribute tables and finds the shortest distance between a customer and a store by splitting the distance calculation across a distributed cluster instead of a single machine.</p>
+      <p class="meta">Filed March 14, 2014. Granted March 19, 2019. Assigned to Walmart Apollo, LLC.</p>
+    </div>
+
+    <article class="entry" style="margin-top:1.5rem">
+      <div class="when">Publication</div>
+      <div>
+        <h3>Deep Learning for Financial Stress Testing</h3>
+        <p>Author. A paper applying deep learning to financial stress testing.</p>
+      </div>
+    </article>
+    <article class="entry">
+      <div class="when">Dec 2025</div>
+      <div>
+        <h3>Research on agentic AI and middle management</h3>
+        <p>Presented at the Poprad Economic and Management Forum (PEMF 2025) in Slovakia. The organizers confirmed the paper is moving to publication.</p>
+      </div>
+    </article>
+  </section>
+
+  <section id="talks">
+    <h2>Talks and lectures</h2>
+    <p class="intro">Invitations to share production AI experience with students, researchers and logistics leaders.</p>
+
+    <article class="entry">
+      <div class="when">May 20, 2026</div>
+      <div>
+        <h3>Home Delivery World 2026, Nashville</h3>
+        <p>Invited panelist on "Minimizing Disruptions Through Automated Exception Handling and Notifications," at the Music City Center. Invitation from the conference organizer, Terrapinn.</p>
+      </div>
+    </article>
+    <article class="entry">
+      <div class="when">Dec 5, 2025</div>
+      <div>
+        <h3>Poprad Economic and Management Forum, Slovakia</h3>
+        <p>Presented research on agentic AI to an international academic audience. Certificate issued by the organizing committee chair.</p>
+      </div>
+    </article>
+    <article class="entry">
+      <div class="when">Aug 19, 2025</div>
+      <div>
+        <h3>Guest lecture: Generative AI and reimagining retail supply chains</h3>
+        <p>Invited resource person at Madanapalle Institute of Technology and Science, organized by the Department of Computer Science and Engineering with the Computer Society of India. Topic: the transformative power of agentic AI.</p>
+      </div>
+    </article>
+    <article class="entry">
+      <div class="when">Jun 28, 2025</div>
+      <div>
+        <h3>Industry expert talk on generative AI</h3>
+        <p>Invited by the head of the Department of Artificial Intelligence and Machine Learning at Sri Shakthi Institute of Engineering and Technology, Coimbatore.</p>
+      </div>
+    </article>
+  </section>
+
+  <section id="judging">
+    <h2>Judging</h2>
+    <p class="intro">Volunteer judging of student and early-stage work.</p>
+    <article class="entry">
+      <div class="when">Apr 2025</div>
+      <div>
+        <h3>State Science Day judge, Ohio Academy of Science</h3>
+        <p>Approved to judge student projects in the virtual judging round, April 7 to 14, 2025.</p>
+      </div>
+    </article>
+    <article class="entry">
+      <div class="when">2025</div>
+      <div>
+        <h3>Judge, Ohio STEP</h3>
+        <p>Took part in the 2025 judging orientation and scored STEM business and commercialization plans.</p>
+      </div>
+    </article>
+  </section>
+
+  <section id="background">
+    <h2>Background</h2>
+    <p class="intro">My work moved from understanding customers, to building the data platforms underneath them, to forecasting and AI that help people decide what to move and when.</p>
+    <p>I started on Walmart's assortment optimization team, where I built customer and data platforms on Hadoop and Spark. I then moved into customer analytics and cloud data engineering as a senior data scientist, and since 2022 I have worked on supply chain machine learning at Sam's Club and Walmart Global Tech, most recently as a staff machine learning engineer. Outside work I speak at universities and conferences and judge student competitions in Ohio.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>I welcome invitations to speak, judge, review papers or compare notes on supply chain AI. The quickest way to reach me is <a href="https://www.linkedin.com/in/anand-chinnakannan-datascienceai/" rel="noopener">LinkedIn</a>.</p>
+  </section>
+
+  <footer>Anand Chinnakannan. Views are my own and not those of my employer.</footer>
+</main>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('theme');
+  try{var saved=localStorage.getItem('theme'); if(saved==='light'||saved==='dark') root.setAttribute('data-theme',saved);}catch(e){}
+  btn.addEventListener('click',function(){
+    var dark=root.getAttribute('data-theme')==='dark' ||
+      (!root.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    var next=dark?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('theme',next);}catch(e){}
+  });
+  var links=[].slice.call(document.querySelectorAll('.rail nav a'));
+  var map={}; links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var ids=Object.keys(map).map(function(id){return document.getElementById(id);}).filter(Boolean);
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(a){a.removeAttribute('aria-current');});
+          map[e.target.id].setAttribute('aria-current','true');
+        }
+      });
+    },{rootMargin:'-20% 0px -70% 0px'});
+    ids.forEach(function(el){io.observe(el);});
+  }
+})();
+</script>
+</body>
+</html>
